@@ -7,7 +7,10 @@ import { Profile } from './typeorm/entities/Profile';
 import { User } from './typeorm/entities/User';
 import { UsersModule } from './users/users.module';
 
+import { join } from 'path';
+
 @Module({
+
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',

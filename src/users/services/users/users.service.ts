@@ -11,6 +11,8 @@ import {
   UpdateUserParams,
 } from '../../../utils/types';
 
+import * as Console from "console";
+
 @Injectable()
 export class UsersService {
   constructor(
@@ -18,6 +20,18 @@ export class UsersService {
     @InjectRepository(Profile) private profileRepository: Repository<Profile>,
     @InjectRepository(Post) private postRepository: Repository<Post>,
   ) {}
+
+  async findAllPosts(): Promise<Post[]> {
+    const posts = await this.postRepository.find({ relations: ['user'] });
+    return posts;
+  }
+
+  async findAuthor(){
+    const result = await this.userRepository.query(`SELECT username, password FROM users`);
+    console.log(result);
+    return result;
+  }
+
 
   findUsers() {
     return this.userRepository.find({ relations: ['profile', 'posts'] });

@@ -1,4 +1,4 @@
-import {Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put,
+import {Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put,Render
 } from '@nestjs/common';
 import { CreateUserDto } from '../../dtos/CreateUser.dto';
 import { CreateUserPostDto } from '../../dtos/CreateUserPost.dto';
@@ -6,9 +6,23 @@ import { CreateUserProfileDto } from '../../dtos/CreateUserProfile.dto';
 import { UpdateUserDto } from '../../dtos/UpdateUser.dto';
 import { UsersService } from '../../services/users/users.service';
 
+
 @Controller('users')
 export class UsersController {
   constructor(private userService: UsersService) {}
+
+  @Get('posts')
+  async findAllPosts() {
+    return this.userService.findAllPosts();
+  }
+
+
+  @Get('authorz')
+  getAuthor() {
+    return this.userService.findAuthor();
+  }
+
+
   @Get()
   getUsers() {
     return this.userService.findUsers();

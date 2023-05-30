@@ -1,3 +1,4 @@
+import { IsNotEmpty, IsString } from 'class-validator';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { User } from './User';
 
@@ -7,9 +8,13 @@ export class Post {
   id: number;
 
   @Column()
+  @IsNotEmpty()
+  @IsString()
   title: string;
 
   @Column()
+  @IsNotEmpty()
+  @IsString()
   description: string;
 
   @ManyToOne(() => User, (user) => user.posts)
